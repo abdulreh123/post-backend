@@ -1,0 +1,44 @@
+require "test_helper"
+
+class CommentsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @comment = comments(:one)
+    @post = posts(:one)
+  end
+
+  test "should get index" do
+    get comments_url, as: :json
+    assert_response :success
+  end
+
+  test "should create comment" do
+    assert_difference("Comment.count") do
+      post comments_url, params: { comment: { content: @comment.content, user: @comment.user, post_id: @post.id  } }, as: :json
+    end
+
+    assert_response :created
+  end
+ 
+ test "should get comments in post" do
+     get comment_url(@comment), as: :json
+    assert_response :success
+  end
+
+  test "should show comment" do
+    get comment_url(@comment), as: :json
+    assert_response :success
+  end
+
+  test "should update comment" do
+    patch comment_url(@comment), params: { comment: { content: @comment.content, user: @comment.user, post_id: @post.id } }, as: :json
+    assert_response :success
+  end
+
+  test "should destroy comment" do
+    assert_difference("Comment.count", -1) do
+      delete comment_url(@comment), as: :json
+    end
+
+    assert_response :no_content
+  end
+end
