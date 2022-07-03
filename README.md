@@ -1,24 +1,39 @@
-# README
+# Post crud with ruby on rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#ruby-version: 3.1.2
 
-Things you may want to cover:
+#rails-version: 7.0.3
 
-* Ruby version
+## Scripts
 
-* System dependencies
+to start the service you have to run:
 
-* Configuration
+### `bundle install`
 
-* Database creation
+this will install all the dependencies for the project
 
-* Database initialization
+### `rails db:migrate`
 
-* How to run the test suite
+adds all the necessary tables in the database
 
-* Services (job queues, cache servers, search engines, etc.)
+### `rails s`
 
-* Deployment instructions
+starts the server on port 3000
 
-* ...
+
+# run test
+
+to start the testing you have to:
+
+
+### `rails db:migrate RAILS_ENV=test`
+
+adds all the necessary tables in the test database
+
+### `cd spec`
+
+go to tests location
+
+### `rails spec`
+
+run test

@@ -4,16 +4,17 @@ RSpec.describe '/comments', type: :request do
   post = Post.new(  id:1,title:'Test',content:'12345', user:'user1')
    let(:valid_attributes) do
     {
-      'id' => '1',
+      'id' => 1,
       'content' => 'test content',
       'user' => 'user1',
       'post_id' => post.id
     }
   end
+  
 
    describe 'GET /comments' do
     before do
-      Comment.create(valid_attributes)
+      Comment.new(valid_attributes)
     end
     it 'get all posts comments' do
       get "/posts/comments/#{post.id}/1"
@@ -24,9 +25,9 @@ RSpec.describe '/comments', type: :request do
     end
   end
   describe 'POST /comments' do
-    before do
-      Comment.create(valid_attributes)
-    end
+    # before do
+    #   Comment.create(valid_attributes)
+    # end
     it 'adds comments' do
       post '/comments', params: { comment:valid_attributes }
       expect(response).to be_successful
@@ -35,13 +36,12 @@ RSpec.describe '/comments', type: :request do
       expect(hash_body.keys).to match_array(["content", "created_at", "id", "post_id", "updated_at", "user"])
     end
   end
-describe 'PUT /posts' do
-   before do
-      Comment.create(valid_attributes)
-    end
+describe 'PUT /comments' do
+  #  before do
+  #     Comment.create(valid_attributes)
+  #   end
     let(:new_attributes) do
         {  
-          'id' =>1,
           'content' => '12345',
           'user' => "user2"
         }
@@ -56,10 +56,10 @@ describe 'PUT /posts' do
       expect(hash_body.keys).to match_array(["content", "created_at", "id", "post_id", "updated_at", "user"])
     end
   end
-  describe 'DELETE /posts' do
-    it 'deletes posts' do
+  describe 'DELETE /comments' do
+    it 'deletes comments' do
        comment = Comment.new(valid_attributes)
-       comment.save
+      #  comment.save
       delete "/comments/#{comment.id}"
       expect(response).to be_successful
     end
